@@ -67,6 +67,50 @@
         .nav a:hover {
             color: #3498db;
         }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .buttons a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #2c3e50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .buttons a:hover {
+            background-color: #3498db;
+        }
+
+        /* Styles for the video section */
+        .video-section {
+            margin-top: 40px;
+        }
+
+        .video-section h2 {
+            text-align: center;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body>
@@ -87,24 +131,30 @@
         </div>
     </div>
 
+    <div class="buttons">
+        <a href="#" target="_blank">Paper</a>
+        <a href="#" target="_blank">Videos</a>
+        <a href="#" target="_blank">Code</a>
+        <a href="#" target="_blank">Data</a>
+        <a href="#" target="_blank">Model</a>
+    </div>
+
     <div class="abstract" id="abstract">
         <h2>Abstract</h2>
-        <p>This research presents an innovative approach to Sinhala language question-answering systems by incorporating visual clues. Our system combines natural language processing techniques with computer vision to enhance the accuracy and contextual understanding of questions in the Sinhala language. This multimodal approach significantly improves the system's ability to comprehend and respond to queries that require visual context interpretation.</p>
+        <p>This research aims to develop an intelligent Sinhala question-and-answer system to enhance technological resources for Sinhala language processing. This AI-driven system will provide an interactive platform for college students to engage in conversational, object-based learning in Sinhala. Voice input will facilitate questions, and responses will be delivered in Sinhala audio, enhancing immersion and usability. This manages a local Mongo database for knowledge storage and retrieval of the data system that wants access to relevant information. This interactive Sinhala Q&A system used BERT model achitecute and it is trained on Sinhala dataset. Overall system has capability to adapt according to objects available in the vision field and then generate responses based on the object specific context. Objectidentification is done by YOLO model. In addition to developing a Sinhala BERT NLP model, Sinhala NLP Wordpiece tokenizer and developing Sinhala Dataset suitable for Sinhala BERT modelare sub-contributions. Following result of this research can show that this system is an effective tool. When showing Banana tothe system and asking ෙකෙසල්කි යන්ෙන් ෙමානවද? (What arebananas?), system voice output will be පළතුරක් (a fruit). Inconclusion, this research will contribute to the field of educationaltechnology and by developing this system, college students will have access to a tool that can assist them in improving their knowledge and proficiency in the Sinhala language.</p>
     </div>
 
     <div class="content-section" id="introduction">
         <h2>Introduction</h2>
-        <p>The development of question-answering systems in Sinhala presents unique challenges due to the language's morphological complexity and limited digital resources. This research addresses these challenges by incorporating visual information processing alongside traditional text-based analysis.</p>
+        <p>TODO</p>
     </div>
 
     <div class="content-section" id="methodology">
         <h2>Methodology</h2>
         <p>Our approach combines:</p>
         <ul>
-            <li>Advanced Natural Language Processing for Sinhala text</li>
-            <li>Computer Vision algorithms for visual clue processing</li>
-            <li>Deep Learning models for multimodal integration</li>
-            <li>Custom dataset creation for Sinhala QA with visual elements</li>
+            <li>TODO</li>
+            <li>TODO</li>
         </ul>
     </div>
 
@@ -112,23 +162,39 @@
         <h2>Results</h2>
         <p>The system demonstrates significant improvements in:</p>
         <ul>
-            <li>Question comprehension accuracy</li>
-            <li>Answer relevance and precision</li>
-            <li>Processing speed and efficiency</li>
-            <li>Handling of complex queries requiring visual context</li>
+            <li>TODO</li>
+            <li>TODO</li>
         </ul>
+    </div>
+
+    <!-- Video section -->
+    <div class="video-section">
+        <h2>Demo Videos</h2>
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
     </div>
 
     <div class="content-section" id="conclusion">
         <h2>Conclusion</h2>
-        <p>Our research demonstrates the effectiveness of incorporating visual clues in Sinhala question-answering systems. The multimodal approach significantly enhances the system's ability to understand and respond to complex queries, opening new possibilities for advanced language processing applications in Sinhala.</p>
+        <p>TODO</p>
+    </div>
+
+    <div class="content-section">
+        <h2>BibTeX</h2>
+        <pre><code class="language-bibtex">
+@inproceedings{YourPaperCitation,
+  title={Intelligent Sinhala Question and Answer System with Visual Clues},
+  author={[Author Names]},
+  booktitle={[Conference Name]},
+  year={2024},
+  pages={[pages]}
+}
+        </code></pre>
     </div>
 
     <div class="footer">
-        <p>© 2024 [Your Institution]. All rights reserved.</p>
-        <p>
-            <a href="https://github.com/[your-username]/[repository-name]">View on GitHub</a>
-        </p>
+        <p>© 2024 Indramal Wansekara. All rights reserved.</p>
     </div>
 </body>
 </html>
