@@ -148,6 +148,7 @@
         margin: 0 auto;
         position: relative;
         overflow: hidden;
+        margin-bottom: 40px;
       }
 
       .carousel-track {
@@ -161,11 +162,13 @@
         height: 300px;
       }
 
-      .carousel-slide img {
+      .carousel-slide img,
+      .carousel-slide iframe {
         width: 100%;
         height: 100%;
         object-fit: cover;
         border-radius: 8px;
+        border: none;
       }
 
       .carousel-button {
@@ -182,6 +185,7 @@
         align-items: center;
         justify-content: center;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 10;
       }
 
       .carousel-button:hover {
@@ -215,6 +219,12 @@
 
       .indicator.active {
         background: #3b82f6;
+      }
+
+      h2 {
+        text-align: center;
+        margin: 20px 0;
+        color: #333;
       }
     </style>
   </head>
@@ -298,27 +308,85 @@
       </ul>
     </div>
 
-    <div class="carousel-container">
-      <div class="carousel-track">
-        <div class="carousel-slide">
-          <img src="/api/placeholder/400/300" alt="Slide 1" />
+    <!-- Image Carousel -->
+    <h2>Image Gallery</h2>
+    <div class="carousel-container" id="imageCarousel">
+        <div class="carousel-track">
+            <div class="carousel-slide">
+                <img src="/api/placeholder/400/300" alt="Slide 1" />
+            </div>
+            <div class="carousel-slide">
+                <img src="/api/placeholder/400/300" alt="Slide 2" />
+            </div>
+            <div class="carousel-slide">
+                <img src="/api/placeholder/400/300" alt="Slide 3" />
+            </div>
+            <div class="carousel-slide">
+                <img src="/api/placeholder/400/300" alt="Slide 4" />
+            </div>
+            <div class="carousel-slide">
+                <img src="/api/placeholder/400/300" alt="Slide 5" />
+            </div>
+            <div class="carousel-slide">
+                <img src="/api/placeholder/400/300" alt="Slide 6" />
+            </div>
         </div>
-        <div class="carousel-slide">
-          <img src="/api/placeholder/400/300" alt="Slide 2" />
+        <button class="carousel-button prev">←</button>
+        <button class="carousel-button next">→</button>
+        <div class="carousel-indicators"></div>
+    </div>
+
+    <!-- Video Carousel -->
+    <h2>Video Gallery</h2>
+    <div class="carousel-container" id="videoCarousel">
+        <div class="carousel-track">
+            <div class="carousel-slide">
+                <iframe
+                    src="https://www.youtube.com/embed/VIDEO_ID_1"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
+            </div>
+            <div class="carousel-slide">
+                <iframe
+                    src="https://www.youtube.com/embed/VIDEO_ID_2"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
+            </div>
+            <div class="carousel-slide">
+                <iframe
+                    src="https://www.youtube.com/embed/VIDEO_ID_3"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
+            </div>
+            <div class="carousel-slide">
+                <iframe
+                    src="https://www.youtube.com/embed/VIDEO_ID_4"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
+            </div>
+            <div class="carousel-slide">
+                <iframe
+                    src="https://www.youtube.com/embed/VIDEO_ID_5"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
+            </div>
+            <div class="carousel-slide">
+                <iframe
+                    src="https://www.youtube.com/embed/VIDEO_ID_6"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
+            </div>
         </div>
-        <div class="carousel-slide">
-          <img src="/api/placeholder/400/300" alt="Slide 3" />
-        </div>
-        <div class="carousel-slide">
-          <img src="/api/placeholder/400/300" alt="Slide 4" />
-        </div>
-        <div class="carousel-slide">
-          <img src="/api/placeholder/400/300" alt="Slide 5" />
-        </div>
-        <div class="carousel-slide">
-          <img src="/api/placeholder/400/300" alt="Slide 6" />
-        </div>
-      </div>
+        <button class="carousel-button prev">←</button>
+        <button class="carousel-button next">→</button>
+        <div class="carousel-indicators"></div>
+    </div>
 
       <button class="carousel-button prev">←</button>
       <button class="carousel-button next">→</button>
@@ -328,7 +396,7 @@
 
     <!-- Video section -->
     <div class="video-section">
-      <h2>Demo Videos</h2>
+      <h2>Demo Video</h2>
       <div class="video-container">
         <iframe
           width="560"
@@ -342,7 +410,7 @@
     </div>
 
     <div class="video-section">
-      <h2>Demo Videos</h2>
+      <h2>Demo Videos List</h2>
       <div class="video-container">
         <iframe
           width="560"
@@ -391,110 +459,98 @@
         alert("BibTeX citation copied to clipboard!");
       }
       class Carousel {
-        constructor(element) {
-          this.container = element;
-          this.track = element.querySelector(".carousel-track");
-          this.slides = Array.from(element.querySelectorAll(".carousel-slide"));
-          this.indicators = element.querySelector(".carousel-indicators");
+            constructor(element, autoPlayInterval = 3000) {
+                this.container = element;
+                this.track = element.querySelector('.carousel-track');
+                this.slides = Array.from(element.querySelectorAll('.carousel-slide'));
+                this.indicators = element.querySelector('.carousel-indicators');
+                this.autoPlayInterval = autoPlayInterval;
+                
+                this.currentIndex = 0;
+                this.slidesPerView = 3;
+                this.totalSlides = Math.ceil(this.slides.length / this.slidesPerView);
+                
+                this.createIndicators();
+                this.setupEventListeners();
+                this.startAutoPlay();
+                this.updateCarousel();
+            }
 
-          this.currentIndex = 0;
-          this.slidesPerView = 3;
-          this.totalSlides = Math.ceil(this.slides.length / this.slidesPerView);
+            createIndicators() {
+                for (let i = 0; i < this.totalSlides; i++) {
+                    const button = document.createElement('button');
+                    button.classList.add('indicator');
+                    if (i === 0) button.classList.add('active');
+                    button.addEventListener('click', () => this.goToSlide(i));
+                    this.indicators.appendChild(button);
+                }
+            }
 
-          this.createIndicators();
-          this.setupEventListeners();
-          this.startAutoPlay();
-          this.updateCarousel();
+            setupEventListeners() {
+                this.container.querySelector('.prev').addEventListener('click', () => {
+                    this.prevSlide();
+                    this.resetAutoPlay();
+                });
+
+                this.container.querySelector('.next').addEventListener('click', () => {
+                    this.nextSlide();
+                    this.resetAutoPlay();
+                });
+
+                // Pause autoplay on hover
+                this.container.addEventListener('mouseenter', () => this.stopAutoPlay());
+                this.container.addEventListener('mouseleave', () => this.startAutoPlay());
+            }
+
+            updateCarousel() {
+                const offset = -this.currentIndex * (100 / this.slidesPerView) * this.slidesPerView;
+                this.track.style.transform = `translateX(${offset}%)`;
+                
+                // Update indicators
+                const indicators = Array.from(this.indicators.children);
+                indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === this.currentIndex);
+                });
+            }
+
+            nextSlide() {
+                this.currentIndex = (this.currentIndex + 1) % this.totalSlides;
+                this.updateCarousel();
+            }
+
+            prevSlide() {
+                this.currentIndex = (this.currentIndex - 1 + this.totalSlides) % this.totalSlides;
+                this.updateCarousel();
+            }
+
+            goToSlide(index) {
+                this.currentIndex = index;
+                this.updateCarousel();
+                this.resetAutoPlay();
+            }
+
+            startAutoPlay() {
+                this.stopAutoPlay();
+                this.autoPlayInterval = setInterval(() => this.nextSlide(), this.autoPlayInterval);
+            }
+
+            stopAutoPlay() {
+                if (this.autoPlayInterval) {
+                    clearInterval(this.autoPlayInterval);
+                }
+            }
+
+            resetAutoPlay() {
+                this.stopAutoPlay();
+                this.startAutoPlay();
+            }
         }
 
-        createIndicators() {
-          for (let i = 0; i < this.totalSlides; i++) {
-            const button = document.createElement("button");
-            button.classList.add("indicator");
-            if (i === 0) button.classList.add("active");
-            button.addEventListener("click", () => this.goToSlide(i));
-            this.indicators.appendChild(button);
-          }
-        }
-
-        setupEventListeners() {
-          this.container
-            .querySelector(".prev")
-            .addEventListener("click", () => {
-              this.prevSlide();
-              this.resetAutoPlay();
-            });
-
-          this.container
-            .querySelector(".next")
-            .addEventListener("click", () => {
-              this.nextSlide();
-              this.resetAutoPlay();
-            });
-
-          // Pause autoplay on hover
-          this.container.addEventListener("mouseenter", () =>
-            this.stopAutoPlay()
-          );
-          this.container.addEventListener("mouseleave", () =>
-            this.startAutoPlay()
-          );
-        }
-
-        updateCarousel() {
-          const offset =
-            -this.currentIndex *
-            (100 / this.slidesPerView) *
-            this.slidesPerView;
-          this.track.style.transform = `translateX(${offset}%)`;
-
-          // Update indicators
-          const indicators = Array.from(this.indicators.children);
-          indicators.forEach((indicator, index) => {
-            indicator.classList.toggle("active", index === this.currentIndex);
-          });
-        }
-
-        nextSlide() {
-          this.currentIndex = (this.currentIndex + 1) % this.totalSlides;
-          this.updateCarousel();
-        }
-
-        prevSlide() {
-          this.currentIndex =
-            (this.currentIndex - 1 + this.totalSlides) % this.totalSlides;
-          this.updateCarousel();
-        }
-
-        goToSlide(index) {
-          this.currentIndex = index;
-          this.updateCarousel();
-          this.resetAutoPlay();
-        }
-
-        startAutoPlay() {
-          this.stopAutoPlay();
-          this.autoPlayInterval = setInterval(() => this.nextSlide(), 3000);
-        }
-
-        stopAutoPlay() {
-          if (this.autoPlayInterval) {
-            clearInterval(this.autoPlayInterval);
-          }
-        }
-
-        resetAutoPlay() {
-          this.stopAutoPlay();
-          this.startAutoPlay();
-        }
-      }
-
-      // Initialize the carousel
-      document.addEventListener("DOMContentLoaded", () => {
-        const carousel = new Carousel(
-          document.querySelector(".carousel-container")
-        );
-      });
+        // Initialize both carousels with different autoplay intervals
+        document.addEventListener('DOMContentLoaded', () => {
+            const imageCarousel = new Carousel(document.querySelector('#imageCarousel'), 3000); // 3 seconds for images
+            const videoCarousel = new Carousel(document.querySelector('#videoCarousel'), 5000); // 5 seconds for videos
+        });
     </script>
   </body>
 </html>
