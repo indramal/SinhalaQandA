@@ -1,224 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intelligent Sinhala Question and Answer System with Visual Clues</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Intelligent Sinhala Question and Answer System with Visual Clues
+    </title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css"
+    />
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
-        }
-        .header {
-            text-align: center;
-            padding: 40px 0;
-            background: #f5f5f5;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-        .authors {
-            color: #666;
-            font-size: 1.1em;
-            margin-bottom: 20px;
-        }
-        .abstract {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-        h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-            margin-top: 30px;
-        }
-        .content-section {
-            margin: 20px 0;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            border-top: 1px solid #eee;
-        }
-        .nav {
-            position: sticky;
-            top: 0;
-            background: white;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .nav a {
-            margin: 0 10px;
-            color: #2c3e50;
-            text-decoration: none;
-        }
-        .nav a:hover {
-            color: #3498db;
-        }
-        .buttons {
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
-        }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #333;
+      }
+      .header {
+        text-align: center;
+        padding: 40px 0;
+        background: #f5f5f5;
+        border-radius: 8px;
+        margin-bottom: 30px;
+      }
+      h1 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+      .authors {
+        color: #666;
+        font-size: 1.1em;
+        margin-bottom: 20px;
+      }
+      .abstract {
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+      }
+      h2 {
+        color: #2c3e50;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+        margin-top: 30px;
+      }
+      .content-section {
+        margin: 20px 0;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 50px;
+        padding: 20px;
+        border-top: 1px solid #eee;
+      }
+      .nav {
+        position: sticky;
+        top: 0;
+        background: white;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+      }
+      .nav a {
+        margin: 0 10px;
+        color: #2c3e50;
+        text-decoration: none;
+      }
+      .nav a:hover {
+        color: #3498db;
+      }
+      .buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+      }
 
-        .buttons a {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 0 10px;
-            background-color: #2c3e50;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
+      .buttons a {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 0 10px;
+        background-color: #2c3e50;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
 
-        .buttons a:hover {
-            background-color: #3498db;
-        }
+      .buttons a:hover {
+        background-color: #3498db;
+      }
 
-        /* Styles for the video section */
-        .video-section {
-            margin-top: 40px;
-        }
+      /* Styles for the video section */
+      .video-section {
+        margin-top: 40px;
+      }
 
-        .video-section h2 {
-            text-align: center;
-        }
+      .video-section h2 {
+        text-align: center;
+      }
 
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-            overflow: hidden;
-        }
+      .video-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%;
+        overflow: hidden;
+      }
 
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        .bibtex-section {
-            position: relative;
-            margin-top: 40px;
-        }
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .bibtex-section {
+        position: relative;
+        margin-top: 40px;
+      }
 
-        .bibtex-section pre {
-            padding: 20px;
-            background-color: #f5f5f5;
-            overflow-x: auto;
-        }
+      .bibtex-section pre {
+        padding: 20px;
+        background-color: #f5f5f5;
+        overflow-x: auto;
+      }
 
-        .bibtex-copy-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #2c3e50;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+      .bibtex-copy-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #2c3e50;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
 
-        .bibtex-copy-button:hover {
-            background-color: #3498db;
-        }
+      .bibtex-copy-button:hover {
+        background-color: #3498db;
+      }
+      .carousel-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .carousel-slide {
+        flex: 0 0 calc(33.333% - 20px);
+        margin: 0 10px;
+        height: 300px;
+      }
+
+      .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+
+      .carousel-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.8);
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .carousel-button:hover {
+        background: rgba(255, 255, 255, 1);
+      }
+
+      .carousel-button.prev {
+        left: 10px;
+      }
+
+      .carousel-button.next {
+        right: 10px;
+      }
+
+      .carousel-indicators {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 20px;
+      }
+
+      .indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #ccc;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .indicator.active {
+        background: #3b82f6;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <nav class="nav">
-        <a href="#abstract">Abstract</a>
-        <a href="#introduction">Introduction</a>
-        <a href="#methodology">Methodology</a>
-        <a href="#results">Results</a>
-        <a href="#conclusion">Conclusion</a>
+      <a href="#abstract">Abstract</a>
+      <a href="#introduction">Introduction</a>
+      <a href="#methodology">Methodology</a>
+      <a href="#results">Results</a>
+      <a href="#conclusion">Conclusion</a>
     </nav>
 
     <div class="header">
-        <h1>Intelligent Sinhala Question and Answer System by Incorporating Visual Clues</h1>
-        <div class="authors">
-            [Author Names]<br>
-            [Institution/University Name]<br>
-            [Contact Email]
-        </div>
+      <h1>
+        Intelligent Sinhala Question and Answer System by Incorporating Visual
+        Clues
+      </h1>
+      <div class="authors">
+        [Author Names]<br />
+        [Institution/University Name]<br />
+        [Contact Email]
+      </div>
     </div>
 
     <div class="buttons">
-        <a href="#" target="_blank">Paper</a>
-        <a href="#" target="_blank">Videos</a>
-        <a href="#" target="_blank">Code</a>
-        <a href="#" target="_blank">Data</a>
-        <a href="#" target="_blank">Model</a>
+      <a href="#" target="_blank">Paper</a>
+      <a href="#" target="_blank">Videos</a>
+      <a href="#" target="_blank">Code</a>
+      <a href="#" target="_blank">Data</a>
+      <a href="#" target="_blank">Model</a>
     </div>
 
     <div class="abstract" id="abstract">
-        <h2>Abstract</h2>
-        <p>This research aims to develop an intelligent Sinhala question-and-answer system to enhance technological resources for Sinhala language processing. This AI-driven system will provide an interactive platform for college students to engage in conversational, object-based learning in Sinhala. Voice input will facilitate questions, and responses will be delivered in Sinhala audio, enhancing immersion and usability. This manages a local Mongo database for knowledge storage and retrieval of the data system that wants access to relevant information. This interactive Sinhala Q&A system used BERT model achitecute and it is trained on Sinhala dataset. Overall system has capability to adapt according to objects available in the vision field and then generate responses based on the object specific context. Objectidentification is done by YOLO model. In addition to developing a Sinhala BERT NLP model, Sinhala NLP Wordpiece tokenizer and developing Sinhala Dataset suitable for Sinhala BERT modelare sub-contributions. Following result of this research can show that this system is an effective tool. When showing Banana tothe system and asking ෙකෙසල්කි යන්ෙන් ෙමානවද? (What arebananas?), system voice output will be පළතුරක් (a fruit). Inconclusion, this research will contribute to the field of educationaltechnology and by developing this system, college students will have access to a tool that can assist them in improving their knowledge and proficiency in the Sinhala language.</p>
+      <h2>Abstract</h2>
+      <p>
+        This research aims to develop an intelligent Sinhala question-and-answer
+        system to enhance technological resources for Sinhala language
+        processing. This AI-driven system will provide an interactive platform
+        for college students to engage in conversational, object-based learning
+        in Sinhala. Voice input will facilitate questions, and responses will be
+        delivered in Sinhala audio, enhancing immersion and usability. This
+        manages a local Mongo database for knowledge storage and retrieval of
+        the data system that wants access to relevant information. This
+        interactive Sinhala Q&A system used BERT model achitecute and it is
+        trained on Sinhala dataset. Overall system has capability to adapt
+        according to objects available in the vision field and then generate
+        responses based on the object specific context. Objectidentification is
+        done by YOLO model. In addition to developing a Sinhala BERT NLP model,
+        Sinhala NLP Wordpiece tokenizer and developing Sinhala Dataset suitable
+        for Sinhala BERT modelare sub-contributions. Following result of this
+        research can show that this system is an effective tool. When showing
+        Banana tothe system and asking ෙකෙසල්කි යන්ෙන් ෙමානවද? (What
+        arebananas?), system voice output will be පළතුරක් (a fruit).
+        Inconclusion, this research will contribute to the field of
+        educationaltechnology and by developing this system, college students
+        will have access to a tool that can assist them in improving their
+        knowledge and proficiency in the Sinhala language.
+      </p>
     </div>
 
     <div class="content-section" id="introduction">
-        <h2>Introduction</h2>
-        <p>TODO</p>
+      <h2>Introduction</h2>
+      <p>TODO</p>
     </div>
 
     <div class="content-section" id="methodology">
-        <h2>Methodology</h2>
-        <p>Our approach combines:</p>
-        <ul>
-            <li>TODO</li>
-            <li>TODO</li>
-        </ul>
+      <h2>Methodology</h2>
+      <p>Our approach combines:</p>
+      <ul>
+        <li>TODO</li>
+        <li>TODO</li>
+      </ul>
     </div>
 
     <div class="content-section" id="results">
-        <h2>Results</h2>
-        <p>The system demonstrates significant improvements in:</p>
-        <ul>
-            <li>TODO</li>
-            <li>TODO</li>
-        </ul>
+      <h2>Results</h2>
+      <p>The system demonstrates significant improvements in:</p>
+      <ul>
+        <li>TODO</li>
+        <li>TODO</li>
+      </ul>
+    </div>
+
+    <div class="carousel-container">
+      <div class="carousel-track">
+        <div class="carousel-slide">
+          <img src="/api/placeholder/400/300" alt="Slide 1" />
+        </div>
+        <div class="carousel-slide">
+          <img src="/api/placeholder/400/300" alt="Slide 2" />
+        </div>
+        <div class="carousel-slide">
+          <img src="/api/placeholder/400/300" alt="Slide 3" />
+        </div>
+        <div class="carousel-slide">
+          <img src="/api/placeholder/400/300" alt="Slide 4" />
+        </div>
+        <div class="carousel-slide">
+          <img src="/api/placeholder/400/300" alt="Slide 5" />
+        </div>
+        <div class="carousel-slide">
+          <img src="/api/placeholder/400/300" alt="Slide 6" />
+        </div>
+      </div>
+
+      <button class="carousel-button prev">←</button>
+      <button class="carousel-button next">→</button>
+
+      <div class="carousel-indicators"></div>
     </div>
 
     <!-- Video section -->
     <div class="video-section">
-        <h2>Demo Videos</h2>
-        <div class="video-container">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
+      <h2>Demo Videos</h2>
+      <div class="video-container">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/VIDEO_ID"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
     </div>
 
     <div class="video-section">
-        <h2>Demo Videos</h2>
-        <div class="video-container">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=8G9Dt5vQSpENDFiM&amp;list=PLpW_0fai7mkA0Uvrd2HWCvhFXnuWfgNs2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-</div>
+      <h2>Demo Videos</h2>
+      <div class="video-container">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/videoseries?si=8G9Dt5vQSpENDFiM&amp;list=PLpW_0fai7mkA0Uvrd2HWCvhFXnuWfgNs2"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
     </div>
-    
+
     <div class="content-section" id="conclusion">
-        <h2>Conclusion</h2>
-        <p>TODO</p>
+      <h2>Conclusion</h2>
+      <p>TODO</p>
     </div>
 
     <!-- BibTeX section -->
     <div class="bibtex-section">
-        <h2>BibTeX</h2>
-        <button class="bibtex-copy-button" onclick="copyBibTeX()">Copy to Clipboard</button>
-        <pre><code class="language-bibtex">
+      <h2>BibTeX</h2>
+      <button class="bibtex-copy-button" onclick="copyBibTeX()">
+        Copy to Clipboard
+      </button>
+      <pre><code class="language-bibtex">
 @inproceedings{YourPaperCitation,
   title={Intelligent Sinhala Question and Answer System with Visual Clues},
   author={[Author Names]},
@@ -230,16 +380,121 @@
     </div>
 
     <div class="footer">
-        <p>© 2024 Indramal Wansekara. All rights reserved.</p>
+      <p>© 2024 Indramal Wansekara. All rights reserved.</p>
     </div>
 
-<script>
-        function copyBibTeX() {
-            var bibTexElement = document.querySelector('.bibtex-section pre code');
-            var bibTexText = bibTexElement.innerText;
-            navigator.clipboard.writeText(bibTexText);
-            alert('BibTeX citation copied to clipboard!');
+    <script>
+      function copyBibTeX() {
+        var bibTexElement = document.querySelector(".bibtex-section pre code");
+        var bibTexText = bibTexElement.innerText;
+        navigator.clipboard.writeText(bibTexText);
+        alert("BibTeX citation copied to clipboard!");
+      }
+      class Carousel {
+        constructor(element) {
+          this.container = element;
+          this.track = element.querySelector(".carousel-track");
+          this.slides = Array.from(element.querySelectorAll(".carousel-slide"));
+          this.indicators = element.querySelector(".carousel-indicators");
+
+          this.currentIndex = 0;
+          this.slidesPerView = 3;
+          this.totalSlides = Math.ceil(this.slides.length / this.slidesPerView);
+
+          this.createIndicators();
+          this.setupEventListeners();
+          this.startAutoPlay();
+          this.updateCarousel();
         }
+
+        createIndicators() {
+          for (let i = 0; i < this.totalSlides; i++) {
+            const button = document.createElement("button");
+            button.classList.add("indicator");
+            if (i === 0) button.classList.add("active");
+            button.addEventListener("click", () => this.goToSlide(i));
+            this.indicators.appendChild(button);
+          }
+        }
+
+        setupEventListeners() {
+          this.container
+            .querySelector(".prev")
+            .addEventListener("click", () => {
+              this.prevSlide();
+              this.resetAutoPlay();
+            });
+
+          this.container
+            .querySelector(".next")
+            .addEventListener("click", () => {
+              this.nextSlide();
+              this.resetAutoPlay();
+            });
+
+          // Pause autoplay on hover
+          this.container.addEventListener("mouseenter", () =>
+            this.stopAutoPlay()
+          );
+          this.container.addEventListener("mouseleave", () =>
+            this.startAutoPlay()
+          );
+        }
+
+        updateCarousel() {
+          const offset =
+            -this.currentIndex *
+            (100 / this.slidesPerView) *
+            this.slidesPerView;
+          this.track.style.transform = `translateX(${offset}%)`;
+
+          // Update indicators
+          const indicators = Array.from(this.indicators.children);
+          indicators.forEach((indicator, index) => {
+            indicator.classList.toggle("active", index === this.currentIndex);
+          });
+        }
+
+        nextSlide() {
+          this.currentIndex = (this.currentIndex + 1) % this.totalSlides;
+          this.updateCarousel();
+        }
+
+        prevSlide() {
+          this.currentIndex =
+            (this.currentIndex - 1 + this.totalSlides) % this.totalSlides;
+          this.updateCarousel();
+        }
+
+        goToSlide(index) {
+          this.currentIndex = index;
+          this.updateCarousel();
+          this.resetAutoPlay();
+        }
+
+        startAutoPlay() {
+          this.stopAutoPlay();
+          this.autoPlayInterval = setInterval(() => this.nextSlide(), 3000);
+        }
+
+        stopAutoPlay() {
+          if (this.autoPlayInterval) {
+            clearInterval(this.autoPlayInterval);
+          }
+        }
+
+        resetAutoPlay() {
+          this.stopAutoPlay();
+          this.startAutoPlay();
+        }
+      }
+
+      // Initialize the carousel
+      document.addEventListener("DOMContentLoaded", () => {
+        const carousel = new Carousel(
+          document.querySelector(".carousel-container")
+        );
+      });
     </script>
-</body>
+  </body>
 </html>
