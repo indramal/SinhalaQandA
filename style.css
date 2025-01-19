@@ -9,7 +9,7 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   color: var(--text-color-light);
   background-color: var(--bg-color-light);
@@ -18,7 +18,7 @@ body {
   padding-right: 4px;
 }
 p {
-  margin: 4px 0;
+  margin: 0 0 15px;
 }
 
 .dark-mode {
@@ -127,7 +127,7 @@ h2 {
 .buttons a {
   display: inline;
   padding: 10px 20px;
-  margin: 2px 10px;
+  margin: 4px 10px;
   background-color: #2c3e50;
   color: #fff;
   text-decoration: none;
